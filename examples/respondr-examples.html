@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Respondr Examples</title>
+  <!-- Load local jQuery. -->
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <!-- Load local lib and tests. -->
+  <script src="../src/respondr.js"></script>
+</head>
+<body>
+  <h1>Respondr Examples</h1>
+  <div class="some-class">
+    <p>Look, a picture.</p>
+    <p>[respondr 2423496036]</p>
+  </div>
+</body>
+
+<script>
+  // Don't include this next line and it's close in your actual code:
+  $.getScript('../my-api-key.js', function(){
+
+    /*
+     * This page uses the api you set in my-api-key.js
+     * The commented code below is here for copy-pasters.
+     */
+
+    // $.respondr({
+    //   apiKey: 'your api key here'
+    // })
+    $('.some-class').respondr();
+
+  });
+
+
+</script>
+
+</html>
