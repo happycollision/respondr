@@ -32,7 +32,7 @@
     if (typeof options === "object") {
       // Assume it's actually an options hash
       // Override default options with passed-in options.
-      options = $.extend($.respondr.options, options);
+      $.extend($.respondr.options, options);
     
     } else if (typeof options === "string" || typeof options === "number"){
       // We make the call
