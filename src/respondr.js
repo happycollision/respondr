@@ -63,10 +63,4 @@
     apiKey: ''
   };
 
-  // Custom selector.
-  $.expr[':'].respondr = function (elem) {
-    // Does this element contain the name of your plugin?
-    return $(elem).text().indexOf('respondr') !== -1;
-  };
-
 }(jQuery));
