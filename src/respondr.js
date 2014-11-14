@@ -9,28 +9,62 @@
 (function ($) {
 
   // Collection method.
-  $.fn.respondr = function () {
-
-    var flickrData = {}; // object where flickr id is the index of the returned data
+  $.fn.respondr = function (mediaQuerySizes, includeSquares) {
+    // object where flickr id is the index of the returned data
     // ie { "1239847239": {flickr data promise}, "90384752": {flickr data promise} }
+    var flickrData = {};
 
-    var createHtmlFromFlickrResponse = function(response){
+    if ( typeof mediaQuerySizes !== 'string' || mediaQuerySizes.length < 1 ) {
+      mediaQuerySizes = '100vw';
+    }
+    if (includeSquares !== true && includeSquares !== 'only') {
+      includeSquares = false;
+    }
+
+    var createImgElementsFromFlickrResponse = function(response){
+      if (response.stat !== 'ok'){
+        // Handle the error
+        return 'no images';
+      }
+      
       var output = '';
+      var image = new Image();
+      var srcset = [];
       $.each(response.sizes.size, function(i, size){
-        output += '<img src="'+ size.source +'">';
+        var addSize = function(){
+          srcset.push(size.source + ' ' + size.width + 'w');
+        };
+        var imgIsSquare = ( size.label.indexOf('Square') !== -1 );
+        
+        if ( includeSquares === true ){
+          addSize();
+          return;
+        }
+        if ( includeSquares === false && !imgIsSquare ) {
+          addSize();
+          return;
+        }
+        if ( includeSquares === 'only' && imgIsSquare ) {
+          addSize();
+        }
       });
+      srcset = srcset.join(',');
+      image.srcset = srcset;
+      image.sizes = mediaQuerySizes;
+
+      output = image;
       return output;
     };
 
     var getFlickrDataAndWrapShortcodes = function(element){
       var pattern = /\[ {0,1}respondr (.*?)\]/ig;
-      newHtml = $(element).html().replace(pattern, function(match, $1){
+      var imgWrapper = $(element).html().replace(pattern, function(match, $1){
         flickrData[$1] = $.respondr($1);
         return '<span class="respondr-return" data-respondr-id="'+ $1 +'">' +
-          match + '</span>';
+          'replacing image' + '</span>';
       });
-      $(element).html(newHtml);
-    }
+      $(element).html(imgWrapper);
+    };
 
     return this.each(function () {
 
@@ -40,8 +74,8 @@
 
       $.each(flickrData, function(i,promise){
         promise.done( function(response){
-          var html = createHtmlFromFlickrResponse(response);
-          $respondrSpans.filter("[data-respondr-id='" + i + "']").html(html);
+          var element = createImgElementsFromFlickrResponse(response);
+          $respondrSpans.filter("[data-respondr-id='" + i + "']").html('').append(element);
         });
       });
 
