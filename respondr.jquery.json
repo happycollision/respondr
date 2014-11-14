@@ -1,8 +1,8 @@
 {
   "name": "respondr",
   "title": "Respondr",
-  "version": "0.0.0",
   "description": "jQuery plugin to replace Flickr image ID strings with fully responsive images using `srcset` and `sizes`.",
+  "version": "0.1.0",
   "homepage": "https://github.com/happycollision/respondr.git",
   "author": {
     "name": "Don Denton",
