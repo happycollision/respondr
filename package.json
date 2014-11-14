@@ -1,7 +1,7 @@
 {
   "name": "respondr",
   "version": "0.0.0",
-  "description": "Respondr",
+  "description": "jQuery plugin to replace Flickr image ID strings with fully responsive images using `srcset` and `sizes`.",
   "keywords": [
     "jquery-plugin"
   ],
