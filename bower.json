@@ -1,6 +1,11 @@
 {
   "name": "respondr",
   "version": "0.1.0",
+  "main": "dist/jquery.respondr.js",
+  "license": "MIT",
+  "ignore": [
+    "test", "**/.*", "*.json", "Gruntfile.js"
+  ],
   "dependencies": {
     "jquery": "~1.11.1"
   },
