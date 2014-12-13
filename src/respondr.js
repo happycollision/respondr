@@ -75,7 +75,15 @@
       $.each(flickrData, function(i,promise){
         promise.done( function(response){
           var element = createImgElementsFromFlickrResponse(response);
-          $respondrSpans.filter("[data-respondr-id='" + i + "']").html('').append(element);
+          var $thisElement = $respondrSpans.filter("[data-respondr-id='" + i + "']")
+
+          $thisElement.html('').append(element);
+
+          if ($.respondr.options.usePicturefill) {
+            if (typeof window.picturefill === 'function') { picturefill(); }
+          }
+
+          $.respondr.options.callback($thisElement);
         });
       });
 
@@ -123,7 +131,9 @@
 
   // Static method default options.
   $.respondr.options = {
-    apiKey: ''
+    apiKey: '',
+    usePicturefill: false,
+    callback: function(){return;}
   };
 
 }(jQuery));

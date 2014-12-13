@@ -44,6 +44,23 @@ $.respondr({apiKey: 'your key here'});
 
 After that is done, you can start replacing strings with images.
 
+### Other options
+
+```javascript
+
+// Static method default options.
+$.respondr.options = {
+  apiKey: '',
+  usePicturefill: false,
+  callback: function(jQueryObject){return;}
+};
+
+```
+
+__apiKey__: (string, required) Sets the Flickr API key.
+__usePicturefill__: (boolean) Calls `window.picturefill()` automatically after the replacement is done since the kind of DOM alteration does not trigger Picturefill natively.
+__callback__: (function) Optionally define a callback that will be fired after the string has been replaced with the new DOM elements. The jQuery object passed in is the `<span>` that wraps the newly-created `<picture>` element.
+
 ### Strings for valid replacement
 
 In your HTML, you'll need to include strings that Respondr knows to look out for. They will look like this:
