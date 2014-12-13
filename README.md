@@ -93,4 +93,5 @@ Check out the [examples page](examples/respondr-examples.html).
 
 ## Release History
 
+0.2.0: Add options for a callback and to automatically call `picturefill()`.
 0.1.0: Initial release with minimal feature set.
