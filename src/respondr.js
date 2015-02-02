@@ -24,6 +24,7 @@
     var createImgElementsFromFlickrResponse = function(response){
       if (response.stat !== 'ok'){
         // Handle the error
+        // TODO: display information to user to let them know there was a problem with Flickr. Or that there was a problem with their input.
         return 'no images';
       }
       
