@@ -104,7 +104,7 @@
     var format = 'json';
 
     if (options === null || typeof options === "undefined") {
-      // TODO: Throw an error
+      throw("$.respondr() expects an argument. None given.");
       return;
     }
 
@@ -130,7 +130,7 @@
       });
     
     } else {
-      // TODO: Throw an error
+      throw("$.respondr() was given an invalid argument.");
       return;
     }
 
