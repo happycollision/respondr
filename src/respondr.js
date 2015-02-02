@@ -81,6 +81,14 @@
 
           if ($.respondr.options.usePicturefill) {
             if (typeof window.picturefill === 'function') { picturefill(); }
+            else {
+              console.log("Tried to call picturefill(), but it does not exist. Trying again in 2 seconds.");
+              var tryPicturefillAgain = function(){
+                if (typeof window.picturefill === 'function') { picturefill(); }
+                else {console.log("Still no picturefill(). Giving up.");}
+              };
+              setTimeout(function() {tryPicturefillAgain()}, 2000);
+            }
           }
 
           $.respondr.options.callback($thisElement);
