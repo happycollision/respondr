@@ -76,19 +76,19 @@
       $.each(flickrData, function(i,promise){
         promise.done( function(response){
           var element = createImgElementsFromFlickrResponse(response);
-          var $thisElement = $respondrSpans.filter("[data-respondr-id='" + i + "']")
+          var $thisElement = $respondrSpans.filter("[data-respondr-id='" + i + "']");
 
           $thisElement.html('').append(element);
 
           if ($.respondr.options.usePicturefill) {
-            if (typeof window.picturefill === 'function') { picturefill(); }
+            if (typeof window.picturefill === 'function') { window.picturefill(); }
             else {
-              console.log("Tried to call picturefill(), but it does not exist. Trying again in 2 seconds.");
+              window.console.log("Tried to call picturefill(), but it does not exist. Trying again in 2 seconds.");
               var tryPicturefillAgain = function(){
-                if (typeof window.picturefill === 'function') { picturefill(); }
-                else {console.log("Still no picturefill(). Giving up.");}
+                if (typeof window.picturefill === 'function') { window.picturefill(); }
+                else {window.console.log("Still no picturefill(). Giving up.");}
               };
-              setTimeout(function() {tryPicturefillAgain()}, 2000);
+              setTimeout(function() {tryPicturefillAgain();}, 2000);
             }
           }
 
@@ -106,7 +106,6 @@
 
     if (options === null || typeof options === "undefined") {
       throw("$.respondr() expects an argument. None given.");
-      return;
     }
 
     if (typeof options === "object") {
@@ -132,7 +131,6 @@
     
     } else {
       throw("$.respondr() was given an invalid argument.");
-      return;
     }
 
 
