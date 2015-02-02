@@ -1,6 +1,6 @@
-/*! respondr - v0.1.0 - 2014-11-14
+/*! respondr - v0.2.1 - 2015-02-01
 * https://github.com/happycollision/respondr
-* Copyright (c) 2014 Don Denton; Licensed MIT */
+* Copyright (c) 2015 Don Denton; Licensed MIT */
 (function ($) {
 
   // Collection method.
@@ -19,6 +19,7 @@
     var createImgElementsFromFlickrResponse = function(response){
       if (response.stat !== 'ok'){
         // Handle the error
+        // TODO: display information to user to let them know there was a problem with Flickr. Or that there was a problem with their input.
         return 'no images';
       }
       
@@ -70,7 +71,23 @@
       $.each(flickrData, function(i,promise){
         promise.done( function(response){
           var element = createImgElementsFromFlickrResponse(response);
-          $respondrSpans.filter("[data-respondr-id='" + i + "']").html('').append(element);
+          var $thisElement = $respondrSpans.filter("[data-respondr-id='" + i + "']");
+
+          $thisElement.html('').append(element);
+
+          if ($.respondr.options.usePicturefill) {
+            if (typeof window.picturefill === 'function') { window.picturefill(); }
+            else {
+              window.console.log("Tried to call picturefill(), but it does not exist. Trying again in 2 seconds.");
+              var tryPicturefillAgain = function(){
+                if (typeof window.picturefill === 'function') { window.picturefill(); }
+                else {window.console.log("Still no picturefill(). Giving up.");}
+              };
+              setTimeout(function() {tryPicturefillAgain();}, 2000);
+            }
+          }
+
+          $.respondr.options.callback($thisElement);
         });
       });
 
@@ -83,8 +100,7 @@
     var format = 'json';
 
     if (options === null || typeof options === "undefined") {
-      // TODO: Throw an error
-      return;
+      throw("$.respondr() expects an argument. None given.");
     }
 
     if (typeof options === "object") {
@@ -109,8 +125,7 @@
       });
     
     } else {
-      // TODO: Throw an error
-      return;
+      throw("$.respondr() was given an invalid argument.");
     }
 
 
@@ -118,7 +133,9 @@
 
   // Static method default options.
   $.respondr.options = {
-    apiKey: ''
+    apiKey: '',
+    usePicturefill: false,
+    callback: function(){return;}
   };
 
 }(jQuery));
