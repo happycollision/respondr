@@ -18,6 +18,11 @@
   </div>
 
   <h1>Respondr Examples</h1>
+  A gallery...
+  <div class="gallery">
+    <p>[respondr gallery 72157650653171405]</p>  
+  </div>
+
   <div class="no-arguments">
     <p>Look, a picture that's never square.</p>
     <p>[respondr 2423496036]</p>
@@ -38,10 +43,11 @@
       window.jQuery || document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"><\/script>')
 </script>
 <!-- Load local lib and tests. -->
-<script src="../dist/jquery.respondr.min.js"></script>
+<script src="../dist/jquery.respondr.js"></script>
 
 <script>
   $.getScript('my-api-key.js', function(){
+    $('.gallery').respondr();
     $('.no-arguments').respondr();
     $('.include-squares').respondr('', true);
     $('.squares-only').respondr('', 'only');
