@@ -71,6 +71,14 @@ In your HTML, you'll need to include strings that Respondr knows to look out for
 
 That's it. The number is replaced with the Flickr ID of the image. As of now, there is no way to add `alt` text to the image, but that is coming.
 
+As of 0.3.0, you can add the keyword "gallery" to the shortcode followed by an album ID.
+
+```
+[respondr gallery 72157650653171405]
+```
+
+This will create a div filled with shortcodes for images in that album. Those shortcodes will immediately be processed via `respondr()` with the same arguments originally passed in.
+
 ### Call Respondr's collection method
 
 At the bottom of your page, call the collection method like you would any other jQuery chainable method.
@@ -93,6 +101,7 @@ Check out the [examples page](examples/respondr-examples.html).
 
 ## Release History
 
+0.3.0: Adds [respondr gallery xxxxxxxx] to the mix.
 0.2.1: Attempt to fix a bug where picturefill wasn't being called. This was possibly due to some kind of race condition. Also adds some custom errors.
 0.2.0: Add options for a callback and to automatically call `picturefill()`.  
 0.1.0: Initial release with minimal feature set.
