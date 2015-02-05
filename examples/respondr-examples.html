@@ -10,6 +10,13 @@
   </style>
 </head>
 <body>
+  <div class="notice">
+    <h1>Notice:</h1>
+    <p>This file will not work without a valid API key from Flickr. Create a file inside this folder called my-api-key.js and copy the following into it:</p>
+    <p><code>$.respondr({ apiKey: 'YOUR API KEY HERE' });</code></p>
+    <p>Plug in your API key and this page will work. The file you created will not be tracked by version control because it is called out in the <code>.gitignore</code> file.</p>
+  </div>
+
   <h1>Respondr Examples</h1>
   <div class="no-arguments">
     <p>Look, a picture that's never square.</p>
@@ -34,15 +41,7 @@
 <script src="../dist/jquery.respondr.min.js"></script>
 
 <script>
-  $.getScript('../my-api-key.js', function(){
-    /*
-     * This page uses the api you set in my-api-key.js
-     * The commented code below is here for copy-pasters.
-     */
-
-    // $.respondr({
-    //   apiKey: 'your api key here'
-    // })
+  $.getScript('my-api-key.js', function(){
     $('.no-arguments').respondr();
     $('.include-squares').respondr('', true);
     $('.squares-only').respondr('', 'only');
