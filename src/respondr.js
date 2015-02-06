@@ -98,11 +98,11 @@
           $thisElement.html('').append(element);
 
           if ($.respondr.options.usePicturefill) {
-            if (typeof window.picturefill === 'function') { window.picturefill(); }
+            if (typeof window.picturefill === 'function') { window.picturefill({reevaluate:true}); }
             else {
               window.console.log("Tried to call picturefill(), but it does not exist. Trying again in 2 seconds.");
               var tryPicturefillAgain = function(){
-                if (typeof window.picturefill === 'function') { window.picturefill(); }
+                if (typeof window.picturefill === 'function') { window.picturefill({reevaluate:true}); }
                 else {window.console.log("Still no picturefill(). Giving up.");}
               };
               setTimeout(function() {tryPicturefillAgain();}, 2000);
